@@ -34,9 +34,12 @@ func find(root, ext string) []string {
 }
 
 func main() {
-	// TODO: make the directory configurable
-	const dir = "/run/media/mmcblk0p1/steamapps/common"
-	// const dir = "/home/deck/.local/share/Steam/steamapps/common"
+	// default steamapps common dir: ~/.local/share/Steam/steamapps/common
+	// example steamapps common dir on steam deck sd card: /run/media/mmcblk0p1/steamapps/common
+	var dir = "~/.local/share/Steam/steamapps/common"
+	if len(os.Args) >= 2 {
+		dir = os.Args[1]
+	}
 
 	// attempt to update all files that end in confg
 	for _, s := range find(dir, ".conf") {
